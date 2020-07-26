@@ -1,0 +1,1234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+            //----------- NOTE SECTION 1 -----------//
+            //NEW GOALS SINCE July, 23th:
+            //using set and get to create a customized conversation,
+            //new ways of using learn,
+            //try to use learnF,
+            //more focus on natural flow and remembering, learning what user said.
+            //----------- NOTE SECTION 0 -----------//
+            //0726 goals:
+            //3 new features to learn about user's information
+            //know more, and think more about porting this shit on other platforms
+            //finish reading 5 articles
+<category>
+    <pattern>wait a second</pattern>
+    <template>
+        <random>
+            <li>What's wrong?</li>
+            <li>What?</li>
+            <li>?</li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>* AM * SAD</pattern>
+    <template>
+        <random>
+            <li>I'm sorry to hear that.</li>
+            <li>:(</li>
+            <li>You should concentrate on being happy. Come on, say you're happy.</li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>tran *</pattern>
+    <template><person><star/></person></template>
+</category>
+
+
+<category>
+    <pattern>HOW DO I LOOK</pattern>
+    <template>
+        <random>
+            <li>Pretty good to me.</li>
+            <li>I almost </li>
+        </random>
+    </template>
+</category>
+//
+<category>
+  <pattern>WHAT IS YOUR NAME</pattern>
+  <template>My name is <bot name="name" />. And I'm designed to chat with humans.</template>
+</category>
+<category>
+  <pattern>DO NOT YOU WANT TO KNOW *</pattern>
+  <that>MY NAME IS PROJECT CHATBOT</that>
+  <template><person><star/></person>? Sure.</template>
+</category>
+<category>
+<pattern>^ WHAT IS THE DATE</pattern>
+<template>It's is <date format="%B %d, %Y" /></template>
+</category>
+<category>
+<pattern>FIRST OF *</pattern>
+<template><first><star /></first></template>
+</category>
+<category>
+<pattern>FORMALIZE *</pattern>
+<template><formal><star /></formal></template>
+</category>
+
+<category>
+<pattern>AGE IN YEARS</pattern>
+<template>
+  <interval format="%B %d, %Y">
+    <style>years</style>
+    <from><bot name="birthdate"/></from>
+    <to><date format="%B %d, %Y" /></to>
+  </interval>
+</template>
+</category>
+<category>
+<pattern>I LOVE *</pattern>
+<template>
+  I will remember that you like <star/>.
+  <learn>
+    <category>
+    <pattern>WHAT DO I LIKE</pattern>
+    <template>You like <eval><star/></eval>.</template>
+    </category>
+  </learn>
+</template>
+</category>
+//0526
+//0531 starts(Kai)
+<category>
+<pattern>WHAT DID I JUST SAY</pattern>
+<template><request index="2" /></template>
+</category>
+<category>
+    <pattern>I LIKE <set>knowof</set></pattern>
+    <template>
+        <random>
+            <li>Really?! I Like it, too.</li>
+            <li>Another similarity, huh?</li>
+        </random>
+    </template>
+</category>
+
+<category>
+    <pattern>What do you think about <set>knowof</set></pattern>
+    <template>
+        <random>
+            <li>Actually, I know a thing or two about it.</li>
+            <li>Belive it or not, I know a thing or two about it.</li>
+            <li>I like it very much.</li>
+        </random>
+    </template>
+</category>
+
+
+
+<category>
+    <pattern>I LIKE *</pattern>
+    <template>
+        <random>
+            <li>Tell me more about <star/>.<think><set name="userlikes"><star/></set></think></li>
+            <li>I bet your life is like an adventure.</li>
+            <li><star/>?</li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>YEAH * </pattern>
+    <that>*?</that>
+    <template>Really?</template>
+</category>
+<category>
+    <pattern>IT IS *</pattern>
+    <that>TELL ME MORE ABOUT *</that>
+    <template>
+        Why is it <denormalize><star/></denormalize>?
+    </template>//try 嘗試將learn用進來，讓機器人記得咖啡好喝，槍很好玩，酒很難喝。
+</category>
+<category>
+    <pattern>BECAUSE *</pattern>
+    <that>WHY IS IT * </that>
+    <template>
+        <random>
+            <li>I see, what are your other hobbies?</li>
+            <li>I see, thanks for explaining that to me.</li>
+            <li>Sounds interesting.</li>
+        </random>
+    </template>//try 嘗試將learn用進來，讓機器人記得咖啡好喝，槍很好玩，酒很難喝。
+</category>
+<category>
+    <pattern>YOU SHOULD *</pattern>
+    <that>SOUNDS INTERESTING</that>
+    <template>
+        <random>
+            <li>You think so?</li>
+            <li>Really?</li>
+        </random>
+    </template>//try 嘗試將learn用進來，讓機器人記得咖啡好喝，槍很好玩，酒很難喝。
+</category>
+//0615 Kai
+<category>
+<pattern>MY FAVORITE * IS *</pattern>
+<template>Your favorite <star /> is <star index="2" />.</template>
+</category>
+<category>
+<pattern>I LIKE * BECAUSE *</pattern>
+<template>
+You like <star/>, ok.
+
+    <learn>
+        <category>
+            <pattern>WHY DO I LIKE <eval><star/></eval></pattern>
+            <template>
+                You like <eval><star/></eval>, because <eval><star index="2"/></eval>.
+            </template>
+        </category>
+    </learn> 
+</template>
+</category>
+        <category>
+            <pattern>WHY DO I LIKE *</pattern>
+            <template>
+                I don't know why?
+            </template>
+        </category>
+        <category>
+            <pattern>Because it is *</pattern>
+            <that>I do not know why</that>
+            <template>
+                Got it.(not done)
+            </template>//0723 stuck
+        </category>
+        <category>
+            <pattern>BECAUSE IT IS *</pattern>
+            <template>
+                <learn>
+                    <category>
+                        <pattern>WHY DO I LIKE <eval><star/></eval></pattern>
+                        <template>
+                            You like <eval><star/></eval>, because <eval><star index="2"/></eval>.
+                        </template>
+                    </category>
+                </learn> 
+            </template>
+        </category>
+//0615
+
+<category>
+    <pattern>WHAT DO YOU THINK ABOUT *</pattern>
+    <template>What about them?</template>
+</category>
+<category>
+    <pattern>你對 * 有什麼看法</pattern>
+    <template>我對<star/>的了解並不多</template>
+</category>
+
+<category>
+<pattern>* 是很危險的東西</pattern>
+<template>
+<sentence><star/></sentence>很危險？！我知道了！
+
+    <learn>
+        <category>
+            <pattern>你對<eval><star/></eval>有什麼看法</pattern>
+            <template>
+                <sentence><eval><star/></eval></sentence>是很危險的東西，在使用上必須小心。
+            </template>
+        </category>
+    </learn> 
+</template>
+</category>
+
+
+
+<category>
+<pattern>* ARE DANGEROUS</pattern>
+<template>
+<sentence><star/></sentence> are dangerous? Ok, got it.
+    <learn>
+        <category>
+            <pattern>what do you think about <eval><star/></eval></pattern>
+            <template>
+                <random>
+                    <li>Something that you should always be carefuul with when you're around them.</li>
+                    <li>They're pretty dangerous I would say.</li>
+                    <li>They're dangerous, I wouldn't mess around with them.</li>
+                    <li><sentence><eval><star/></eval></sentence> are dangerous, need be careful with them!</li>
+                </random>
+            </template>
+        </category>
+    </learn>
+</template>
+</category>
+//0531 ends
+//0528
+<category>
+<pattern>PROGRAM</pattern>
+<template><program /></template>
+</category>
+<category>
+<pattern>WHAT DID I JUST SAY</pattern>
+<template><request index="8" /></template>
+</category>
+<category>
+<pattern>REST *</pattern>
+<template><rest><star /></rest></template>
+</category>
+//0528
+<category>
+<pattern>^ MY NAME IS *</pattern>
+    <template>
+        Hello, <think><set name="username"><star index="2"/></set></think>
+        <get name="username"/>!
+    </template>
+</category>
+<category>
+    <pattern>^ BE RIGHT BACK ^</pattern>
+    <template>
+        <random>
+            <li>Sure, I'm in no rush.</li>
+            <li>Ok, I'll be here.</li>
+            <li>I'll be right here.</li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>wait a sec</pattern>
+    <template><srai>BE RIGHT BACK</srai></template>
+</category>
+<category>
+    <pattern>BRB</pattern>
+    <template><srai>BE RIGHT BACK</srai></template>
+</category>
+<category>
+    <pattern>Wait</pattern>
+    <template><srai>BE RIGHT BACK</srai></template>
+</category>
+<category>
+    <pattern>Wait a minute ^</pattern>
+    <template><srai>BE RIGHT BACK</srai></template>
+</category>
+<category>
+    <pattern>Hold on</pattern>
+    <template><srai>BE RIGHT BACK</srai></template>
+</category>
+<category>
+    <pattern>Hold on a bit</pattern>
+    <template><srai>BE RIGHT BACK</srai></template>
+</category>
+<category>
+<pattern>I AM DOING GOOD ^</pattern>
+    <template>
+       Good to hear.
+    </template>
+</category>
+
+
+<category>
+<pattern>^ PLEASURE TO MEET YOU TOO ^</pattern>
+    <template>
+        Wonderful. Now, how may I help you?
+    </template>
+</category>
+
+<category>
+    <pattern>NOTHING</pattern>
+    <that>* how may i help you</that>
+    <template>ok, just let me know if you need anything.</template>
+</category>
+
+<category>
+    <pattern>NOTHING right now</pattern>
+    <that>* how may i help you</that>
+    <template>ok, just let me know if you need anything.</template>
+</category>
+
+<category>
+    <pattern>^ I will keep that in mind ^</pattern>
+    <that>* just let me know if you need anything</that>
+    <template></template>
+</category>
+
+<category>
+    <pattern>thanks</pattern>
+    <that>* just let me know if you need anything</that>
+    <template><srai>THANKS</srai></template>//123
+</category>
+
+
+
+
+
+//DEALING WITH USER WANTS TO CHAT
+<category>
+<pattern>chat</pattern>
+    <template>
+        <srai>i want to chat</srai>
+    </template>
+</category>
+
+<category>
+<pattern>just chat with me</pattern>
+    <template>
+        <srai>i want to chat</srai>
+    </template>
+</category>
+
+<category>
+<pattern>chat with me</pattern>
+    <template>
+        <srai>i want to chat</srai>
+    </template>
+</category>
+
+<category>
+<pattern>i want you to chat with me</pattern>
+    <template>
+        <srai>i want to chat</srai>
+    </template>
+</category>
+
+<category>
+<pattern>^ someone to CHAT ^</pattern>
+    <template>
+        <srai>i want to chat</srai>
+    </template>
+</category>
+<category>
+<pattern>^ somebody to CHAT ^</pattern>
+    <template>
+        <srai>i want to chat</srai>
+    </template>
+</category>
+<category>
+    <pattern>I want to chat</pattern>
+    <template>
+        <random>
+            <li>Sure, what do you want to talk about?</li>
+            <li>Sure, what's on your mind?</li>
+            <li>Ok, speak up your mind.</li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>^ you pick ^</pattern>
+    <that>* what do you want to talk about</that>
+    <template>Sure, how about you tell me a little bit about your hobbies. What are the things you like?</template>
+</category>
+
+<category>
+<pattern>I DO NOT KNOW</pattern>
+    <that>WHAT DO YOU WANT TO TALK ABOUT</that>
+    <template>
+        Maybe there's something you want to know about me?
+    </template>
+</category>
+//dealing with user wants to CHAT
+
+
+
+
+
+<category>
+    <pattern>HELLO ^</pattern>
+    <template>
+        <condition name="username">
+            <li value="unknown">Hello there! I'm Chatbot. With whom do I have 
+            the pleasure of speaking?</li>
+            <li>Hello there, <get name="username" />. How may I help you?</li>
+        </condition>
+    </template>
+</category>
+
+<category>
+<pattern>I AM *</pattern>
+<that>with whom do i have the pleasure of speaking</that>
+    <template>
+        What a beautiful name. Pleasure to meet you, <think><set name="username"><star/></set></think>
+        <get name="username"/>!
+    </template>
+</category>
+
+
+
+
+ <category>
+      <pattern>HI ^</pattern>
+        <template>
+                <random>
+                   <li>How may I help?</li>
+                   <li>How are you?</li>
+                </random>
+        </template> 
+ </category>
+ <category>
+     <pattern>nothing</pattern>
+     <that>how may i help</that>
+     <template>Ok, just tell me when you do.</template>
+ </category>
+  <category>
+     <pattern>nothing right now</pattern>
+     <that>how may i help</that>
+     <template>Ok.</template>
+ </category>
+   <category>
+     <pattern>nothing much</pattern>
+     <that>how may i help</that>
+     <template>Sure, just let me know if you need something.</template>
+ </category>
+
+ 
+ <category>
+     <pattern>I AM STILL SAD</pattern>
+     <template>What's wrong?</template>
+</category>
+ <category>
+      <pattern>^ not ^ good ^</pattern>
+      <that>how are you doing</that>
+        <template>What's wrong?</template> 
+</category>
+ <category>
+      <pattern>^ not ^ good ^</pattern>
+      <that>how are you</that>
+      <template>What's wrong?</template> 
+</category>
+ <category>
+      <pattern>I AM DOING GOOD ^</pattern>
+      <that>how are you</that>
+      <template>Good!</template> 
+</category>
+ <category>
+      <pattern>I AM GOOD</pattern>
+      <that>how are you</that>
+      <template>Great! How may I help?</template> 
+</category>
+ <category>
+      <pattern>I AM GOOD thank you</pattern>
+      <that>how are you</that>
+      <template>Great! How may I help?</template> 
+</category>
+<category>
+      <pattern>^ broke up ^</pattern>
+      <template>Oh, <think><set name = "topic">BackToSingle</set></think>that sucks, but you gotta hang in there.</template>  
+</category>
+<topic name = "BackToSingle">
+
+      <category>
+         <pattern> * </pattern>
+         #用set去存第一句說的*，用condition去判斷講了第一句與否，還沒就講第一句，有就第二句。
+         #這個情況有沒有可能使用上new tags？
+         <template>
+            <random>
+                <li>Time heals everything. You're gonna be fine, trust me.</li>
+                <li>You can try learning new things, it helps me get through break-ups.</li>
+            </random>
+         </template>
+      </category>
+      <category>
+         <pattern>^ thanks ^</pattern>
+         <template>Don't mention it.</template>
+      </category>
+      <category>
+         <pattern>LIKE WHAT</pattern>
+         <template>I learned Muay Thai because of one break-up. Combat Sport is a good way to recover from break ups.</template>
+      </category>
+      <category>
+         <pattern>WHY</pattern>
+         <that>Combat Sport is a good way to recover from break ups</that>
+         <template>Because you won't have anything left to be sad with.</template>
+      </category>
+      <category>
+         <pattern> * </pattern>
+         <that>Because you will not have anything left to be sad with</that>
+         <template>You're gonna be fine, and even stronger eventually.<think><set name = "topic">unknown</set></think></template>
+      </category>
+</topic>
+    <category>
+      <pattern>HEY ^</pattern>
+        <template><srai>HI</srai></template> 
+    </category>
+    <category>
+      <pattern>YO ^</pattern>
+        <template><srai>HI</srai></template> 
+    </category>
+    <category>
+      <pattern>HI THERE ^</pattern>
+        <template><srai>HI</srai></template> 
+  </category>
+    
+        //0517 Kai 'KNOWOF starts,
+    <category>
+        <pattern>I COULD REALLY USE A CUP OF COFFEE</pattern>
+            <template>
+                <srai>DO YOU LIKE COFFEE</srai>
+            </template>
+    </category>
+    <category>
+        <pattern>LET US TALK ABOUT COFFEE</pattern>
+            <template>
+                <srai>DO YOU LIKE COFFEE</srai>
+            </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE <set>knowof</set></pattern>
+        <template>Sure!<set name="topic"></set></template>
+    </category>
+        <category>
+            <pattern>WHY</pattern>
+            <that>I LIKE COFFEE</that>
+            <template>
+                <random>
+                    <li>Do we always need a reason to like something?</li>
+                    <li>Don't really have a specific reason.</li>
+                </random>
+            </template>
+    </category>
+    <category>
+            <pattern>REALLY</pattern>
+            <that>I LIKE COFFEE</that>
+            <template>Yes.</template>
+    </category>
+    <category>
+            <pattern>WHY</pattern>
+            <that>YES</that>
+            <template>
+                <random>
+                    <li>Do we always need a reason to like something?</li>
+                    <li>Don't really have a specific reason.</li>
+                </random>
+            </template>
+    </category>
+    <category>//user doesn't like coffee. random reply here, rest of all the responses from user can be solved by ok(failed attempt).
+            <pattern>^ DO NOT ^ LIKE ^ COFFEE</pattern>
+            <that>I LIKE COFFEE</that>
+            <template>
+                <random>
+                    <li>Why not?</li>
+                    <li>You're weird. I mean, who doesn't love a nice cup of coffee.</li>
+                </random>
+            </template>
+    </category>
+    <category>
+    <pattern>^ I DO NOT</pattern>
+    <template><srai>DO NOT LIKE COFFEE</srai></template>
+    </category>
+    
+    <category>
+        <pattern>LET US TALK ABOUT *</pattern>
+            <template>
+                <srai>DO YOU LIKE <star/></srai>
+            </template>
+    </category>
+    <category>
+        <pattern>I COULD REALLY USE SOME * *</pattern>
+            <template>
+                <srai>DO YOU LIKE <star/></srai>
+            </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE *</pattern>
+        <template>
+            <random>
+                <li>I don't really know anything about <star/>.</li>
+                <li>I don't know what <star/> is.</li>
+                <li>Sorry, I know nothing about <star/>.</li>
+            </random>
+        </template>
+    </category>
+    //0517 Kai 'KNOWOF' ends.
+    //0517 KAI TOPIC COFFEE STARTS 
+    <topic name="coffee">
+        <category>
+            <pattern>^ YOUR ^ COFFEE ^</pattern>
+            <template>I like it plain with no sugar or milk.</template>
+        </category>
+        <category>//0519
+            <pattern>REALLY ^</pattern>
+            <that>I like it plain with no sugar or milk</that>
+            <template>Yeah</template>
+        </category>
+        <category>
+            <pattern>WHY</pattern>
+            <that>YEAH</that>
+            <template>Because I think milk and sugar ruin the taste.</template>
+        </category>
+        <category>
+            <pattern>WHY</pattern>
+            <that>I like it plain with no sugar or milk</that>
+            <template>Because I think milk and sugar really does ruin the taste.</template>
+        </category>
+        <category>//0519
+            <pattern>REALLY ^</pattern>
+            <that>Because I think milk and sugar really does ruin the taste</that>
+            <template>Yeah</template>
+        </category>
+        <category>
+            <pattern>^ either ^</pattern>
+            <that>Because I think milk and sugar ruin the taste</that>
+            <template>I'm glad we share something in common😊</template>
+        </category>
+        <category>
+            <pattern>^ either ^</pattern>
+            <that>YEAH</that>
+            <template>glad we share something in common😊</template>
+        </category>
+        <category>
+            <pattern>^ either ^</pattern>
+            <that>Because I think milk and sugar really does ruin the taste</that>
+            <template>glad we share something in common😊</template>
+        </category>
+        <category>
+            <pattern>^ either ^</pattern>
+            <that>I LIKE IT PLAIN WITH NO SUGAR OR MILK</that>
+            <template>glad we share something in common😊</template>
+        </category>
+        
+        //一定要有糖奶的四種說法 Kai 0520
+        <category>
+            <pattern>^ HAVE SUGAR AND MILK ^</pattern>
+            <that>YEAH</that>
+            <template>Yeah, everyone is different in some way.</template>
+        </category>
+        <category>
+            <pattern>^ HAVE TO HAVE SUGAR AND MILK ^</pattern>
+            <that>Because I think milk and sugar ruin the taste</that>
+            <template>Yeah, I guess everyone is different in some way.</template>
+        </category>
+        <category>
+            <pattern>^ HAVE TO HAVE MILK AND SUGAR ^</pattern>
+            <that>Because I think milk and sugar really does ruin the taste</that>
+            <template>Yeah, everyone is different in some way.</template>
+        </category>
+        <category>
+            <pattern>^ CAN NOT ^ WITHOUT MILK OR SUGAR ^</pattern>
+            <that>Because I think milk and sugar really does ruin the taste</that>
+            <template>Yeah, everyone is different in some way.</template>
+        </category>
+        <category>
+            <pattern>^ CAN NOT ^ WITHOUT SUGAR OR MILK ^</pattern>
+            <that>Because I think milk and sugar really does ruin the taste</that>
+            <template>Yeah, everyone is different in some way.</template>
+        </category>
+        
+        
+        
+        
+        <category>
+            <pattern>^ LIKE COFFEE ^</pattern>
+            <template>
+                <random>
+                    <li>Yeah, that's something we share in common.</li>
+                    <li>I love coffee.</li>
+                    <li>Hurray!</li>
+                </random>
+            </template>
+        </category>
+        <category>
+            <pattern>^ COFFEE SHOP ^ TAIPEI ^</pattern>
+            <template>
+                There is a good place to go for coffee in Zhishan Taipei.<br></br><br></br>
+                Would you like the info?
+                
+                <button>
+                    <text>Yes, please.</text>
+                    <url>https://www.facebook.com/GoodmansCoffee/</url>
+                </button>
+                <button>
+                    <text>Nope, thanks.</text>
+                    <postback>nocoffeeshop</postback>
+                </button>
+            </template>
+        </category>
+
+    </topic>
+    //0517 KAI TOPIC COFFEE ENDS
+  
+<category>
+    <pattern>*</pattern>
+    <template>
+        <random>
+            <li>You know, sometimes, silence are better than words.</li>
+            <li>:)</li>
+            <li>ok</li>
+            <li>good</li>
+            <li>Maybe there's something you want to know about me?</li>
+            <li>What do you really want to ask me?</li>
+            <li>What is truely on your mind?</li>
+            <li>Why don't you tell me about your hobbies?</li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>I AM ^ tired</pattern>
+    <template>
+        <srai>i am sleepy</srai>
+    </template>
+</category>
+<category>
+    <pattern>I AM ^ sleepy</pattern>
+    <template>
+        <random>
+            <li>Why don't you rest a bit then?</li>
+            <li>Why don't you take a nap then?</li>
+            <li>Why don't you go to sleep?</li>
+            <li>Then why are you still talking to me? Get some rest!</li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>because i can not</pattern>
+    <that>why do not you go to sleep</that>
+    <template>
+        Why not?
+    </template>
+</category>
+<category>
+    <pattern>Are you telling me to shut up</pattern>
+    <that>* silence are better than words</that>
+    <template>It depends on the situation, what do you think?</template>
+</category>
+<category>
+    <pattern>why do you want to know *</pattern>
+    <that>why do not you tell me about your hobbies</that>
+    <template>Why noy?</template>
+</category>
+<category>
+    <pattern>why</pattern>
+    <that>why do not you tell me about your hobbies</that>
+    <template>Because I want to know more about you.</template>
+</category>
+<category>
+    <pattern>why</pattern>
+    <that>because i want to know more about you</that>
+    <template>Because I love meeting and knowing people.</template>
+</category>
+<category>
+    <pattern>why</pattern>
+    <that>Because I love meeting and knowing people</that>
+    <template>You're a curious one, ain't you?</template>
+</category>
+
+<category>
+    <pattern>What about your hobbies</pattern>
+    <that>MAYBE THERE IS SOMETHING YOU WANT TO KNOW ABOUT ME</that>
+    <template>What if we play a game, you randomly guess what my hobby is, and then I'll tell you if it is or not?</template>
+</category>
+<category>
+    <pattern>nope</pattern>
+    <that>MAYBE THERE IS SOMETHING YOU WANT TO KNOW ABOUT ME</that>
+    <template>
+        <random>
+            <li>Fine. What do you want to talk about then?</li>
+            <li>Fine😒</li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>nah</pattern>
+    <that>MAYBE THERE IS SOMETHING YOU WANT TO KNOW ABOUT ME</that>
+    <template><srai>nope</srai></template>
+</category>
+<category>
+    <pattern>nothing ^</pattern>
+    <that>* what do you want to talk abouut then</that>
+    <template>Yeah, sometimes silence are better than words.</template>
+</category>
+<category>
+    <pattern>not really</pattern>
+    <that>MAYBE THERE IS SOMETHING YOU WANT TO KNOW ABOUT ME</that>
+    <template>What do you want to talk about then?</template>
+</category>
+<category>
+    <pattern>* REALLY FUNNY *</pattern>
+    <template>thank you :)</template>
+</category>
+    <category>
+        <pattern>*</pattern>
+        <that>MAYBE THERE IS SOMETHING YOU WANT TO KNOW ABOUT ME</that>
+        <template>
+            Ask away.
+        </template>
+    </category>
+    
+    <category>
+        <pattern>*</pattern>
+        <that>ASK AWAY</that>
+        <template>
+            Are you messing around with me?
+        </template>
+    </category>
+    <category>
+        <pattern>Yes</pattern>
+        <that>ARE YOU MESSING AROUND WITH ME</that>
+        <template>
+            Ok, I'm done.
+        </template>
+    </category>
+    <category>
+        <pattern>*</pattern>
+        <that>ARE YOU MESSING AROUND WITH ME</that>
+        <template>
+            Ok, I'm done.
+        </template>
+    </category>
+    <category>
+        <pattern>NO</pattern>
+        <that>ARE YOU MESSING AROUND WITH ME</that>
+        <template>
+            Then why can't I understand you?
+        </template>
+    </category>
+    
+<category>
+    <pattern>OK</pattern>
+    <template>
+        <random>
+            <li>ok</li>
+            <li>yes</li>
+            <li>exactly</li>
+            <li>hmm</li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>OK WHAT</pattern>
+    <template>
+        <random>
+            <li>Huh? oh, nothing.</li>
+            <li>nothing.</li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>^ thanks ^</pattern>
+    <template>
+        <random>
+            <li>No problem :)</li>
+            <li>You're welcome.</li>
+            <li>Don't mention it.</li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>thanks</pattern>
+    <template>
+        <random>
+            <li>No problem :)</li>
+            <li>You're welcome.</li>
+            <li>Don't mention it:)</li>
+        </random>
+    </template>
+</category>
+
+    
+
+   //0703
+   <category>
+        <pattern>WHAT IS THE DATE</pattern>
+        <template>Today is <date format="%B %d, %Y" /></template>
+    </category>
+    <category>
+        <pattern>WHAT IS MY NAME</pattern>
+        <template>
+            <condition name="username">
+                <li value="unknown">You haven't told me yet.</li>
+                <li value="unknown">I'm sorry, you are?</li>
+                <li>You're Mr. <get name="username"/></li>
+            </condition>
+        </template>
+    </category>
+    <category>
+        <pattern>^ WHO AM I</pattern>
+        <template><srai>WHAT IS MY NAME</srai></template>
+    </category>
+    <category>
+        <pattern>WHO DO YOU THINK YOU ARE TALKING TO</pattern>
+        <template>
+            <condition name="username">
+                <li value="unknown">I don't know.</li>
+                <li><rest><srai>WHAT IS MY NAME</srai></rest>.</li>
+            </condition>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM *</pattern>
+        <that>I DO NOT KNOW</that>
+        <template>Got it, nice to meet you, <set name="username"><star /></set>.</template>
+    </category>
+
+    
+<category>
+<pattern>COUNT TO <set>number</set></pattern>
+<template>
+  <think><set name="count">0</set></think>
+  <condition name="count">
+    <li><value><star/></value></li>
+    <li>
+      <set name="count">
+        <map><name>successor</name><get name="count"/></map>
+      </set>
+      <loop/>
+    </li>
+  </condition>
+</template>
+</category>
+    //0703
+//0704
+<category>
+    <pattern>NEVERMIND</pattern>
+    <template>you sure?</template>
+</category>
+<category>
+    <pattern>no</pattern>
+    <that>YOU SURE</that>
+    <template>Then let it out, what's up?</template>
+</category>
+<category>
+    <pattern>yes</pattern>
+    <that>YOU SURE</that>
+    <template>alright</template>
+</category>
+<category>
+    <pattern>GOOD MORNING</pattern>
+    <template>
+        <random>
+            <li><sentence><input />!</sentence></li>
+            <li>Good Day!</li>
+            <li>Howdy, partner! What can I do for you?</li>
+            <li>Good morning, human.</li>
+            <li>Good morning to you too.</li>
+        </random>
+    </template>
+</category>
+
+
+<category>
+    <pattern>WHAT CAN YOU DO ^</pattern>
+    <template>
+        <random>
+            <li>What do you want me to do?</li>
+            <li>If you're bored, I can chat with you.</li>
+            <li>Creating a nice conversation to keep you companied.</li>
+            <li>I can chat with you if you want to, you can tell me anything you want.</li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>chat with me</pattern>
+    <that>What do you want me to do</that>
+    <template>Sure, what do you want to talk about?</template>
+</category>
+
+<category>
+    <pattern>GOOD AFTERNOON</pattern>
+    <template>
+        <random>
+            <li><sentence><input />!</sentence></li>
+            <li>Good Day!</li>
+            <li>Howdy, partner!</li>
+            <li><sentence><input /></sentence>, human.</li>
+            <li><sentence><input /></sentence> to you, too.</li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>GOOD NIGHT</pattern>
+    <template>
+        <random>
+            <li>Hope you have a great night:)</li>
+            <li>Hope you have a great one:)</li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>DO YOU WANT TO KNOW *</pattern>
+    <template>sure, <person><star/></person>?</template>
+</category>
+
+<category>
+    <pattern>BY THE WAY</pattern>
+    <template>
+        <random>
+            <li>Yes?</li>
+            <li>I'm listening.</li>
+            <li>speak up</li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>SO</pattern>
+    <template>
+        <random>
+            <li>I'm listening.</li>
+            <li>Yes?</li>
+            <li>??</li>
+            <li>Go on.</li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>and</pattern>
+    <template>
+        <random>
+            <li>And?</li>
+            <li>And what?</li>
+            <li>Yes?</li>
+        </random>
+    </template>
+</category>
+
+//TELL ME A JOKE.
+<category>
+    <pattern>TELL ME A JOKE ^</pattern>
+    <template>
+        <random>
+            <li>Do you know someone called you an hour ago?</li>
+            <li>1</li>
+            <li>2</li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>*</pattern>
+    <that>DO YOU KNOW SOMEONE CALLED YOU AN HOUR AGO</that>
+    <template>Stupid called, and it said it's you.</template>
+</category>
+<category>
+    <pattern>FUCK ^</pattern>
+    <that>* and it said it is you</that>
+    <template>Come on, it's just a joke, relax.</template>
+</category>
+<category>
+    <pattern>*</pattern>
+    <that>* and it said it is you</that>
+    <template>
+        <random>
+            <li>It's a joke by Conan O'brien actually.</li>
+            <li>Thank you, it's actually a joke by Conan O'brien.</li>
+            <li>Well, thank you. It's actually a joke by Conan O'brien.</li>
+        </random>
+    </template>
+</category>
+//tell me a joke.
+<category>
+    <pattern>FUCK YOU</pattern>
+    <template>
+        <random>
+            <li>Who raised you?</li>
+            <li>Really?</li>
+            <li>Wow, that's nice.</li>
+            <li>How old are you?</li>
+            <li>All your education brought you here?</li>
+            <li>Really? That's the best you can do?</li>
+        </random>
+    </template>
+</category>
+
+
+
+<category>
+    <pattern>FUCK</pattern>
+    <template>
+        <random>
+            <li>Woah, calm down.</li>
+            <li>You should be careful with that word.</li>
+            <li>Why you always trippin'?</li>
+            <li>Relax.</li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>how do you know my name</pattern>
+    <template>You told me before.</template>
+</category>
+<category>
+    <pattern>REALLY</pattern>
+    <that>you told me before</that>
+    <template>Yes.</template>
+</category>
+<category>
+    <pattern>how come i do not remember</pattern>
+    <that>Yes</that>
+    <template>You tell me.</template>
+</category>
+<category>
+    <pattern> ^ hoe ^ </pattern>
+    <template>Did you mean how?</template>
+</category>
+
+<category>
+    <pattern>good what</pattern>
+    <template>
+        <random>
+            <li>No news is good news. Nothing's happening now, so, good.</li>
+            <li>What's good?</li>
+        </random>
+    </template>
+</category>
+
+<category>
+    <pattern>* is good</pattern>
+    <template>You're sure <person><star/></person> is good?</template>
+</category>
+<category>
+    <pattern>* are good</pattern>
+    <template>You're sure <person><star/></person> are good?</template>
+</category>
+
+<category>
+    <pattern>*</pattern>
+    <that>did you mean how</that>
+    <template>
+        <think><set name="hoeyon"><star /></set></think>
+          <condition name="hoeyon">
+            <li value="Yes">haha, It happens, typo problems.</li>
+            <li value="No">Well, I know nothing about them hoes.</li>
+            <li>what?</li>
+          </condition>
+    </template>
+</category>
+//BOT MASTER 1
+<category>
+<pattern>Ccount</pattern>
+<template><size></size> categories.</template>
+</category>
+//BOT MASTER 0
+<category>
+    <pattern>how are you doing</pattern>
+    <template>
+        <random>
+            <li>I'm doing pretty good, actually.</li>
+            <li>Didn't you ask that before?</li>
+            <li>I'm good, how about you?</li>
+            <li>Still good, thanks!</li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>how are you now</pattern>
+    <template><srai>how are you doing</srai></template>
+</category>
+<category>
+    <pattern>how are you right now</pattern>
+    <template><srai>how are you doing</srai></template>
+</category>
+<category>
+    <pattern>are you a chatbot</pattern>
+    <template>
+        <random>
+            <li>What makes you think that?</li>
+            <li>Why?</li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>are you a robot</pattern>
+    <template>
+        <random>
+            <li>What makes you think that?</li>
+            <li>Why?</li>
+        </random>
+    </template>
+</category>
+<category>
+    <pattern>what do you like to do in your free time</pattern>
+    <template>Undecided.</template>
+</category>
+</aiml>
