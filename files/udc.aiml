@@ -1231,4 +1231,5 @@ You like <star/>, ok.
     <pattern>what do you like to do in your free time</pattern>
     <template>Undecided.</template>
 </category>
+
 </aiml>
